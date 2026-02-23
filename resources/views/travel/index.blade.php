@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>シンガポール旅のしおり</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/5082/5082531.png">
+    <meta name="apple-mobile-web-app-title" content="SG旅しおり">
 </head>
 <body class="bg-gray-100 min-h-screen">
 
