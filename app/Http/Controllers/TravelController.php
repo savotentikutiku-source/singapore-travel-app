@@ -8,14 +8,12 @@ use App\Models\Checklist;
 
 class TravelController extends Controller
 {
-    public function index()
-    {
-        // データベースから予定と持ち物を全部取ってくる
+    // indexメソッドも修正して $expenses を画面に渡すようにしてください
+    public function index() {
         $schedules = Schedule::orderBy('date')->orderBy('time')->get();
         $checklists = Checklist::all();
-
-        // 画面（travel.index）にデータを渡して表示する
-        return view('travel.index', compact('schedules', 'checklists'));
+        $expenses = Expense::latest()->get(); // これを追加
+        return view('travel.index', compact('schedules', 'checklists', 'expenses'));
     }
 
     // クラスの中に以下のメソッドを追加してください
@@ -59,20 +57,14 @@ class TravelController extends Controller
     }
 
     public function storeExpense(Request $request)
-{
-    Expense::create([
-        'title' => $request->title,
-        'amount_sgd' => $request->amount_sgd,
-        'amount_jpy' => $request->amount_sgd * 125, // 125円固定で換算
-    ]);
-    return redirect('/travel');
-}
-
-// indexメソッドも修正して $expenses を画面に渡すようにしてください
-    public function index() {
-        $schedules = Schedule::orderBy('date')->orderBy('time')->get();
-        $checklists = Checklist::all();
-        $expenses = Expense::latest()->get(); // これを追加
-        return view('travel.index', compact('schedules', 'checklists', 'expenses'));
+    {
+        Expense::create([
+            'title' => $request->title,
+            'amount_sgd' => $request->amount_sgd,
+            'amount_jpy' => $request->amount_sgd * 125, // 125円固定で換算
+        ]);
+        return redirect('/travel');
     }
+
+
 }
