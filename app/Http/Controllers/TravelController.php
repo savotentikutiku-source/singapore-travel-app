@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Checklist;
+use App\Models\Expense; // 👈 この一行を追加！
 
 class TravelController extends Controller
 {
