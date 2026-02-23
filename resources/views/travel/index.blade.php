@@ -89,6 +89,33 @@
         </div>
     </section>
 
+    <section class="mt-8 mb-8">
+        <h2 class="text-lg font-bold mb-3 border-l-4 border-yellow-500 pl-2">💰 出費メモ（記録）</h2>
+        
+        <form action="/travel/expense" method="POST" class="bg-white p-4 rounded-lg shadow mb-4">
+            @csrf
+            <input type="text" name="title" placeholder="項目（例：ランチ）" class="border p-2 rounded w-full mb-2" required>
+            <div class="flex gap-2 mb-2">
+                <input type="number" name="amount_sgd" placeholder="金額(SGD)" class="border p-2 rounded w-full" required>
+                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded font-bold">記録</button>
+            </div>
+        </form>
+
+        <div class="bg-white rounded-lg shadow p-4">
+            @php $totalJpy = 0; @endphp
+            @foreach($expenses ?? [] as $expense)
+                <div class="flex justify-between border-b py-2 last:border-0">
+                    <span>{{ $expense->title }}</span>
+                    <span class="font-bold">{{ number_format($expense->amount_jpy) }} 円 <span class="text-xs text-gray-400">({{ $expense->amount_sgd }} SGD)</span></span>
+                </div>
+                @php $totalJpy += $expense->amount_jpy; @endphp
+            @endforeach
+            <div class="mt-4 pt-2 border-t-2 border-double text-right font-bold text-lg">
+                合計: {{ number_format($totalJpy) }} 円
+            </div>
+        </div>
+    </section>
+
     <script>
         function convert() {
             const amount = document.getElementById('amount').value;
