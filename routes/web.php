@@ -4,14 +4,14 @@
 use App\Models\Book; // 👈 これを一番上に追加
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\TravelController;
 
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/travel'); // 自動的に /travel へ転送する
 });
 
-use App\Http\Controllers\TravelController;
 
 Route::get('/travel', [TravelController::class, 'index']);
 
